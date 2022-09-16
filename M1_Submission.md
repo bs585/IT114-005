@@ -25,4 +25,4 @@
 <tr><td><table><tr><td> <em>Sub-Task 1: </em> Add the pull request link here (it should end in /pull/#)</td></tr>
 <tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/bs585/IT114-005/pull/1">https://github.com/bs585/IT114-005/pull/1</a> </td></tr>
 </table></td></tr>
-<table><tr><td><em>Grading Link: </em><a rel="noreferrer noopener" href="https://learn.ethereallab.app/homework/IT114-005-F22/it114-m1-gettingstarted/grade/bs585" target="_blank">Grading</a></td></tr></table>
+<table><tr><td><em>Grading Link: </em><a rel="noreferrer noopener" href="https://learn.ethereallab.app/homework/IT114-005-F22/it114-m1-gettingstarted/grade/bs585" target="_blank">Grading</a></td></tr></table> 
