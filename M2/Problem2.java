@@ -1,4 +1,5 @@
 package M2;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 public class Problem2 {
@@ -19,7 +20,13 @@ public class Problem2 {
         double total = 0;
         String totalOutput = "";
         //TODO add/edit code here
-       
+
+        for (int i = 0; i < arr.length; i++){
+
+            total = total + arr[i];    
+        }
+        total = Math.floor(total * 100) /100;
+
         //set the double to a string variable
         totalOutput = total+"";
         //end add/edit section
