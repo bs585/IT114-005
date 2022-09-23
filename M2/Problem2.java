@@ -1,5 +1,4 @@
 package M2;
-import java.text.DecimalFormat;
 import java.util.Arrays;
 
 public class Problem2 {
@@ -26,6 +25,7 @@ public class Problem2 {
             total = total + arr[i];    
         }
         total = Math.floor(total * 100) /100;
+       
 
         //set the double to a string variable
         totalOutput = total+"";
