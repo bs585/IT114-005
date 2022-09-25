@@ -21,12 +21,10 @@ public class Problem2 {
         //TODO add/edit code here
 
         for (int i = 0; i < arr.length; i++){
-
             total = total + arr[i];    
         }
         total = Math.floor(total * 100) /100;
-       
-
+        
         //set the double to a string variable
         totalOutput = total+"";
         //end add/edit section
