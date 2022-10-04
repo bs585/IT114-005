@@ -166,12 +166,14 @@ public class NumberGuesser4 {
             Scanner strikeSelect = new Scanner(System.in);
             System.out.println("Before we begin how many strikes would you like to have?");
             int setStrike = strikeSelect.nextInt();
+
                 maxStrikes = setStrike;
                 System.out.println("You now have: " +maxStrikes+ " strikes!");    
-            
+
                
             System.out.println("Welcome to NumberGuesser4.0");
             System.out.println("To exit, type the word 'quit'.");
+
             loadState();
             do {
                 if (pickNewRandom) {
@@ -200,6 +202,7 @@ public class NumberGuesser4 {
             System.out.println(e.getMessage());
         }
         System.out.println("Thanks for playing!");
+
     }
 
     public static void main(String[] args) {
