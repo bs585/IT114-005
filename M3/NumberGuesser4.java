@@ -98,6 +98,8 @@ public class NumberGuesser4 {
         strikes = 0;
     }
 
+    
+        
     private boolean processCommands(String message) {
         boolean processed = false;
         if (message.equalsIgnoreCase("quit")) {
@@ -118,13 +120,15 @@ public class NumberGuesser4 {
         }
     }
 
-    //Display higher or lower as a hint after a wrong guess
 
     private void processGuess(int guess) {
         if (guess < 0) {
             return;
         }
+        //Display higher or lower as a hint after a wrong guess
+
         System.out.println("You guessed " + guess);
+       
         if (guess == number) {
             win();
             pickNewRandom = true;
@@ -156,9 +160,16 @@ public class NumberGuesser4 {
         }
         return guess;
     }
-
+    //Add a difficulty selector that adjusts the max strikes per level
     public void start() {
         try (Scanner input = new Scanner(System.in);) {
+            Scanner strikeSelect = new Scanner(System.in);
+            System.out.println("Before we begin how many strikes would you like to have?");
+            int setStrike = strikeSelect.nextInt();
+                maxStrikes = setStrike;
+                System.out.println("You now have: " +maxStrikes+ " strikes!");    
+            
+               
             System.out.println("Welcome to NumberGuesser4.0");
             System.out.println("To exit, type the word 'quit'.");
             loadState();
