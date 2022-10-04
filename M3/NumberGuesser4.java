@@ -163,12 +163,15 @@ public class NumberGuesser4 {
     //Add a difficulty selector that adjusts the max strikes per level
     public void start() {
         try (Scanner input = new Scanner(System.in);) {
-            Scanner strikeSelect = new Scanner(System.in);
+            //Scanner strikeSelect = new Scanner(System.in);
             System.out.println("Before we begin how many strikes would you like to have?");
-            int setStrike = strikeSelect.nextInt();
-
+            //int setStrike = strikeSelect.nextInt();
+            int setStrike = Integer.parseInt(input.nextLine());
+                
                 maxStrikes = setStrike;
-                System.out.println("You now have: " +maxStrikes+ " strikes!");    
+                System.out.println("You now have: " +maxStrikes+ " strikes!");
+                System.out.println("Have fun! :-)");    
+                System.out.println("");
 
                
             System.out.println("Welcome to NumberGuesser4.0");
