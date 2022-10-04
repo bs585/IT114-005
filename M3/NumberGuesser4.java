@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
+//Display higher or lower as a hint after a wrong guess
+//Add a difficulty selector that adjusts the max strikes per level
 
 public class NumberGuesser4 {
     private int maxLevel = 1;
@@ -116,6 +118,8 @@ public class NumberGuesser4 {
         }
     }
 
+    //Display higher or lower as a hint after a wrong guess
+
     private void processGuess(int guess) {
         if (guess < 0) {
             return;
@@ -125,8 +129,15 @@ public class NumberGuesser4 {
             win();
             pickNewRandom = true;
         } else {
-            System.out.println("That's wrong");
+            String hint ="";
+            if (guess > number){
+                hint = "select a lower value!";
+            } else if (guess < number) {
+                hint = "select a higher value!";
+            }
+            System.out.println("That's wrong. (HINT: " +hint+ ")");
             strikes++;
+
             if (strikes >= maxStrikes) {
                 lose();
                 pickNewRandom = true;
