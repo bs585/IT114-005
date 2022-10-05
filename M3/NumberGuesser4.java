@@ -125,7 +125,9 @@ public class NumberGuesser4 {
         if (guess < 0) {
             return;
         }
-        //Display higher or lower as a hint after a wrong guess
+        // Oct 4th, 2022
+        // bs585
+        // Display higher or lower as a hint after a wrong guess
 
         System.out.println("You guessed " + guess);
        
@@ -160,7 +162,11 @@ public class NumberGuesser4 {
         }
         return guess;
     }
-    //Add a difficulty selector that adjusts the max strikes per level
+    
+    // Oct 4th, 2022
+    // bs585
+    // Add a difficulty selector that adjusts the max strikes per level
+    
     public void start() {
         try (Scanner input = new Scanner(System.in);) {
             //Scanner strikeSelect = new Scanner(System.in);
