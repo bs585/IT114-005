@@ -1,4 +1,4 @@
-package Sockets.Part6;
+package Sockets.Part9;
 
 
 import javax.swing.BoxLayout;
@@ -7,8 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Sockets.Part6.client.Card;
-import Sockets.Part6.client.ICardControls;
+import Sockets.Part9.client.Card;
+import Sockets.Part9.client.ICardControls;
 
 import java.awt.BorderLayout;
 

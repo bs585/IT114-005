@@ -1,4 +1,4 @@
-package Sockets.Part6.client;
+package Sockets.Part9;
 
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -18,12 +18,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Sockets.Part6.client.views.ChatPanel;
-import Sockets.Part6.client.views.ConnectionPanel;
-import Sockets.Part6.client.views.Menu;
-import Sockets.Part6.client.views.RoomsPanel;
-import Sockets.Part6.client.views.UserInputPanel;
-import Sockets.Part6.common.Constants;
+import Sockets.Part9.client.views.ChatPanel;
+import Sockets.Part9.client.views.ConnectionPanel;
+import Sockets.Part9.client.views.Menu;
+import Sockets.Part9.client.views.RoomsPanel;
+import Sockets.Part9.client.views.UserInputPanel;
+import Sockets.Part9.common.Constants;
 
 public class ClientUI extends JFrame implements IClientEvents, ICardControls {
     CardLayout card = null;// accessible so we can call next() and previous()

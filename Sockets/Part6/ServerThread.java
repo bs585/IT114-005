@@ -1,4 +1,4 @@
-package Sockets.Part9;
+package Sockets.Part6.server;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -7,9 +7,8 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import Sockets.Part9.common.Payload;
-import Sockets.Part9.common.PayloadType;
-import Sockets.Part9.common.RoomResultPayload;
+import Module6.Part6.common.Payload;
+import Module6.Part6.common.PayloadType;
 
 /**
  * A server-side representation of a single client
@@ -23,20 +22,6 @@ public class ServerThread extends Thread {
     // more easily
     private Room currentRoom;
     private static Logger logger = Logger.getLogger(ServerThread.class.getName());
-    private long myId;
-
-    public void setClientId(long id) {
-        myId = id;
-    }
-
-    public long getClientId() {
-        return myId;
-    }
-
-    public boolean isRunning() {
-        return isRunning;
-    }
-
     private void info(String message) {
         System.out.println(String.format("Thread[%s]: %s", getId(), message));
     }
@@ -74,72 +59,31 @@ public class ServerThread extends Thread {
     }
 
     public void disconnect() {
-        sendConnectionStatus(myId, getClientName(), false);
         info("Thread being disconnected by server");
         isRunning = false;
         cleanup();
     }
 
     // send methods
-    public boolean sendRoomName(String name) {
-        Payload p = new Payload();
-        p.setPayloadType(PayloadType.JOIN_ROOM);
-        p.setMessage(name);
-        return send(p);
-    }
-
-    public boolean sendRoomsList(String[] rooms, String message) {
-        RoomResultPayload payload = new RoomResultPayload();
-        payload.setRooms(rooms);
-        //Fixed in Module7.Part9
-        if(message != null){
-            payload.setMessage(message);
-        }
-        return send(payload);
-    }
-
-    public boolean sendExistingClient(long clientId, String clientName) {
-        Payload p = new Payload();
-        p.setPayloadType(PayloadType.SYNC_CLIENT);
-        p.setClientId(clientId);
-        p.setClientName(clientName);
-        return send(p);
-    }
-
-    public boolean sendResetUserList() {
-        Payload p = new Payload();
-        p.setPayloadType(PayloadType.RESET_USER_LIST);
-        return send(p);
-    }
-
-    public boolean sendClientId(long id) {
-        Payload p = new Payload();
-        p.setPayloadType(PayloadType.CLIENT_ID);
-        p.setClientId(id);
-        return send(p);
-    }
-
-    public boolean sendMessage(long clientId, String message) {
+    public boolean sendMessage(String from, String message) {
         Payload p = new Payload();
         p.setPayloadType(PayloadType.MESSAGE);
-        p.setClientId(clientId);
+        p.setClientName(from);
         p.setMessage(message);
         return send(p);
     }
-
-    public boolean sendConnectionStatus(long clientId, String who, boolean isConnected) {
+    public boolean sendConnectionStatus(String who, boolean isConnected){
         Payload p = new Payload();
-        p.setPayloadType(isConnected ? PayloadType.CONNECT : PayloadType.DISCONNECT);
-        p.setClientId(clientId);
+        p.setPayloadType(isConnected?PayloadType.CONNECT:PayloadType.DISCONNECT);
         p.setClientName(who);
-        p.setMessage(isConnected ? "connected" : "disconnected");
+        p.setMessage(isConnected?"connected":"disconnected");
         return send(p);
     }
 
     private boolean send(Payload payload) {
         // added a boolean so we can see if the send was successful
         try {
-            // TODO add logger
+            //TODO add logger
             logger.log(Level.FINE, "Outgoing payload: " + payload);
             out.writeObject(payload);
             logger.log(Level.INFO, "Sent payload: " + payload);
@@ -151,7 +95,7 @@ public class ServerThread extends Thread {
             cleanup();
             return false;
         } catch (NullPointerException ne) {
-            info("Message was attempted to be sent before outbound stream was opened: " + payload);
+            info("Message was attempted to be sent before outbound stream was opened");
             return true;// true since it's likely pending being opened
         }
     }
@@ -171,7 +115,7 @@ public class ServerThread extends Thread {
             ) {
 
                 info("Received from client: " + fromClient);
-                processPayload(fromClient);
+                processMessage(fromClient);
 
             } // close while loop
         } catch (Exception e) {
@@ -185,31 +129,20 @@ public class ServerThread extends Thread {
         }
     }
 
-    void processPayload(Payload p) {
+    void processMessage(Payload p) {
         switch (p.getPayloadType()) {
             case CONNECT:
                 setClientName(p.getClientName());
                 break;
-            case DISCONNECT:
-                Room.disconnectClient(this, getCurrentRoom());
+            case DISCONNECT://TBD
                 break;
             case MESSAGE:
                 if (currentRoom != null) {
                     currentRoom.sendMessage(this, p.getMessage());
                 } else {
                     // TODO migrate to lobby
-                    logger.log(Level.INFO, "Migrating to lobby on message with null room");
                     Room.joinRoom("lobby", this);
                 }
-                break;
-            case GET_ROOMS:
-                Room.getRooms(p.getMessage().trim(), this);
-                break;
-            case CREATE_ROOM:
-                Room.createRoom(p.getMessage().trim(), this);
-                break;
-            case JOIN_ROOM:
-                Room.joinRoom(p.getMessage().trim(), this);
                 break;
             default:
                 break;

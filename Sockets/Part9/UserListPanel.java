@@ -1,4 +1,4 @@
-package Sockets.Part6.client.views;
+package Sockets.Part9;
 
 import java.awt.BorderLayout;
 
@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-import Sockets.Part6.client.ClientUtils;
-import Sockets.Part6.client.ICardControls;
+import Sockets.Part9.client.ClientUtils;
+import Sockets.Part9.client.ICardControls;
 
 public class UserListPanel extends JPanel {
     JPanel userListArea;

@@ -1,4 +1,4 @@
-package Sockets.Part6;
+package Sockets.Part9;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -20,9 +20,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-import Sockets.Part6.client.Client;
-import Sockets.Part6.client.ICardControls;
-import Sockets.Part6.client.Card;
+import Sockets.Part9.client.Card;
+import Sockets.Part9.client.Client;
+import Sockets.Part9.client.ICardControls;
 
 public class RoomsPanel extends JPanel {
     JPanel container;

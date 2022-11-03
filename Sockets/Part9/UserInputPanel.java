@@ -1,4 +1,4 @@
-package Sockets.Part6;
+package Sockets.Part9;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -12,8 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Sockets.Part6.client.ICardControls;
-import Sockets.Part6.client.Card;
+import Sockets.Part9.client.Card;
+import Sockets.Part9.client.ICardControls;
 
 public class UserInputPanel extends JPanel{
     private static Logger logger = Logger.getLogger(UserInputPanel.class.getName()); 
