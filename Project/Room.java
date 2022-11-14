@@ -91,6 +91,7 @@ public class Room implements AutoCloseable{
 	 *                triggering the actions)
 	 */
 	private boolean processCommands(String message, ServerThread client) {
+		
 		boolean wasCommand = false;
 		try {
 			if (message.startsWith(COMMAND_TRIGGER)) {
