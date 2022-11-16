@@ -117,7 +117,7 @@ public class Room implements AutoCloseable{
 					case LOGOFF:
 						Room.disconnectClient(client, this);
 						break;
-					case FLIP;
+					case FLIP:
 						int flip = (int)((Math.random()*(2))+1);
 						String flipMessage = "You got heads!";
 						if(flip ==2){
@@ -127,7 +127,7 @@ public class Room implements AutoCloseable{
 						wasCommand = true;
 						break;
 					
-					case ROLL;
+					case ROLL:
 						int roll = (int)((Math.random()*(5)));
 						String rollMessage = "You rolled a "+Integer.toString(roll)+" (0-4)";
 						sendMessage(client, rollMessage);
