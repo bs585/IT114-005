@@ -117,6 +117,20 @@ public class Room implements AutoCloseable{
 					case LOGOFF:
 						Room.disconnectClient(client, this);
 						break;
+					case FLIP;
+						int flip = (int)((Math.random()*(2))+1);
+						String flipMessage = "You got heads!";
+						if(flip ==2){
+								flipMessage = "You got tails!";
+						}
+						sendMessage(client, flipMessage);
+						wasCommand = true;
+						break;
+					
+					case ROLL;
+						
+						break;
+
 					default:
 						wasCommand = false;
 						break;
@@ -180,6 +194,7 @@ public class Room implements AutoCloseable{
 			}
 		}
 	}
+
 	protected synchronized void sendConnectionStatus(ServerThread sender, boolean isConnected){
 		Iterator<ServerThread> iter = clients.iterator();
 		while (iter.hasNext()) {
