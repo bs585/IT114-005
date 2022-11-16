@@ -117,7 +117,15 @@ public class Room implements AutoCloseable{
 					case LOGOFF:
 						Room.disconnectClient(client, this);
 						break;
-					case FLIP:
+					/*
+					 * BS585
+					 * 11/15/2022
+					 * What flip does is using a random number generator that picks a number between 1-2. Using an if statement
+					 * if the number is 1 the users gets "You get heads" on their screen
+					 * if the number is 2 the users get "you get tails".  sendMessage() sends the message to the users and 
+					 * prompts them the message. 
+					 */
+						case FLIP:
 						int flip = (int)((Math.random()*(2))+1);
 						String flipMessage = "You got heads!";
 						if(flip ==2){
@@ -126,10 +134,16 @@ public class Room implements AutoCloseable{
 						sendMessage(client, flipMessage);
 						wasCommand = true;
 						break;
-					
+					/*
+					 *BS585
+					 * 11/15/2022
+					 * What roll is doing is using math.random to generator a roll between 0-4.
+					 * once /roll is used, rollmessage is than printed out with the dice roll number. 
+					 * sendmessage is used to prompt the users the rollMessage, message.
+					 */
 					case ROLL:
 						int roll = (int)((Math.random()*(5)));
-						String rollMessage = "You rolled a "+Integer.toString(roll)+" (0-4)";
+						String rollMessage = "You rolled a "+Integer.toString(roll)+" (dice roll is 0-4)";
 						sendMessage(client, rollMessage);
 						wasCommand = true;
 						break;

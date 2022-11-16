@@ -20,6 +20,15 @@ public class Payload implements Serializable {
     /**
      * Who the payload is from
      */
+    /**
+     * MY NOTES:
+     * BS585
+     * 11/15/2022
+     * What this is all doing is essentially adding commands be 
+     * read easily. 
+     * Everything in payload are now objects(data types) that help pass data 
+     * between server and client.
+     */
     private String clientName;
     public String getClientName() {
         return clientName;
