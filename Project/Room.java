@@ -128,7 +128,10 @@ public class Room implements AutoCloseable{
 						break;
 					
 					case ROLL;
-						
+						int roll = (int)((Math.random()*(5)));
+						String rollMessage = "You rolled a "+Integer.toString(roll)+" (0-4)";
+						sendMessage(client, rollMessage);
+						wasCommand = true;
 						break;
 
 					default:
