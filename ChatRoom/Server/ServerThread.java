@@ -91,7 +91,7 @@ public class ServerThread extends Thread {
     public boolean sendRoomsList(String[] rooms, String message) {
         RoomResultPayload payload = new RoomResultPayload();
         payload.setRooms(rooms);
-        //Fixed in Module7.Part9
+        //Fixed in ChatRoom
         if(message != null){
             payload.setMessage(message);
         }
