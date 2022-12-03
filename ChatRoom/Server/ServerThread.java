@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import ChatRoom.common.Payload;
-import Chatroom.common.PayloadType;
+import ChatRoom.common.PayloadType;
 import ChatRoom.common.RoomResultPayload;
 
 /**
