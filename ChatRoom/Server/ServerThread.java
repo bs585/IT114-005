@@ -1,4 +1,4 @@
-package Sockets.Part9;
+package ChatRoom.server;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -7,9 +7,9 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import Sockets.Part9.common.Payload;
-import Sockets.Part9.common.PayloadType;
-import Sockets.Part9.common.RoomResultPayload;
+import ChatRoom.common.Payload;
+import ChatRoom.common.PayloadType;
+import ChatRoom.common.RoomResultPayload;
 
 /**
  * A server-side representation of a single client
