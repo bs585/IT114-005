@@ -130,9 +130,9 @@ public class Room implements AutoCloseable {
 					 */
 					case FLIP:
 						int flip = (int)((Math.random()*(2))+1);
-						String flipMessage = "Coin landed on heads!";
+						String flipMessage = "<b style=color:blue>Coin landed on heads!</b>";
 						if(flip ==2){
-								flipMessage = "Coin landed on tails!";
+								flipMessage = "<b style=color:red>Coin landed on tails!</b>";
 						}
 						sendMessage(client, flipMessage);
 						wasCommand = true;
@@ -146,7 +146,7 @@ public class Room implements AutoCloseable {
 				 */
 					case ROLL:
 						int roll = (int)((Math.random()*(5)));
-						String rollMessage = "Dice rolled a "+Integer.toString(roll)+" (dice roll is 0-4)";
+						String rollMessage = "<b style=color:green>Dice rolled a "+Integer.toString(roll)+" (dice roll is 0-4)</b>";
 						sendMessage(client, rollMessage);
 						wasCommand = true;
 						break;
