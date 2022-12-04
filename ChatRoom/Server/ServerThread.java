@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import ChatRoom.common.Payload;
+import ChatRoom.common.ClientPayload;
 import ChatRoom.common.PayloadType;
 import ChatRoom.common.RoomResultPayload;
 
@@ -17,6 +18,8 @@ import ChatRoom.common.RoomResultPayload;
 public class ServerThread extends Thread {
     private Socket client;
     private String clientName;
+    private String formattedName;
+
     private boolean isRunning = false;
     private ObjectOutputStream out;// exposed here for send()
     // private Server server;// ref to our server so we can call methods on it
@@ -48,6 +51,13 @@ public class ServerThread extends Thread {
         this.currentRoom = room;
 
     }
+    public void setFormattedName(String name) {
+        formattedName = name;
+    }
+
+    public String getFormattedName() {
+        return formattedName;
+    }
 
     protected void setClientName(String name) {
         if (name == null || name.isBlank()) {
@@ -74,7 +84,7 @@ public class ServerThread extends Thread {
     }
 
     public void disconnect() {
-        sendConnectionStatus(myId, getClientName(), false);
+        sendConnectionStatus(myId, getClientName(), null, false);
         info("Thread being disconnected by server");
         isRunning = false;
         cleanup();
@@ -98,10 +108,11 @@ public class ServerThread extends Thread {
         return send(payload);
     }
 
-    public boolean sendExistingClient(long clientId, String clientName) {
-        Payload p = new Payload();
+    public boolean sendExistingClient(long clientId, String clientName, String formattedName) {
+        ClientPayload p = new ClientPayload();
         p.setPayloadType(PayloadType.SYNC_CLIENT);
         p.setClientId(clientId);
+        p.setFormattedName(formattedName);
         p.setClientName(clientName);
         return send(p);
     }
@@ -127,10 +138,11 @@ public class ServerThread extends Thread {
         return send(p);
     }
 
-    public boolean sendConnectionStatus(long clientId, String who, boolean isConnected) {
-        Payload p = new Payload();
+    public boolean sendConnectionStatus(long clientId, String who, String formattedName, boolean isConnected) {
+        ClientPayload p = new ClientPayload();
         p.setPayloadType(isConnected ? PayloadType.CONNECT : PayloadType.DISCONNECT);
         p.setClientId(clientId);
+        p.setFormattedName(formattedName);
         p.setClientName(who);
         p.setMessage(isConnected ? "connected" : "disconnected");
         return send(p);
