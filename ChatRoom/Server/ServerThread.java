@@ -6,6 +6,10 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
+
 
 import ChatRoom.common.Payload;
 import ChatRoom.common.ClientPayload;
@@ -19,6 +23,8 @@ public class ServerThread extends Thread {
     private Socket client;
     private String clientName;
     private String formattedName;
+    public List<String> mutedList = new ArrayList<String>();
+
 
     private boolean isRunning = false;
     private ObjectOutputStream out;// exposed here for send()
@@ -53,6 +59,16 @@ public class ServerThread extends Thread {
     }
     public void setFormattedName(String name) {
         formattedName = name;
+    }
+
+    //mute function that doesn't work 
+    public boolean isMuted(String clientName) {
+    	for(String name: mutedList) {
+    		if (name.equals(clientName)){
+    			return true;
+    		}
+    	}
+    	return false;
     }
 
     public String getFormattedName() {
@@ -148,6 +164,7 @@ public class ServerThread extends Thread {
         return send(p);
     }
 
+    
     private boolean send(Payload payload) {
         // added a boolean so we can see if the send was successful
         try {

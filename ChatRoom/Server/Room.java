@@ -27,6 +27,10 @@ public class Room implements AutoCloseable {
 	private final static String LOGOFF = "logoff";
 	private final static String FLIP = "flip";
 	private final static String ROLL = "roll";
+    private final static String MUTE = "mute";
+    private final static String UNMUTE = "unmute";
+	private final static String PM = "@";
+
 	private static Logger logger = Logger.getLogger(Room.class.getName());
 	private HashMap<String, String> converter = null;
 	public Room(String name) {
@@ -128,7 +132,13 @@ public class Room implements AutoCloseable {
 					 * if the number is 2 the users get "you get tails".  sendMessage() sends the message to the users and 
 					 * prompts them the message. 
 					 */
-					case FLIP:
+					
+					 /*
+					  * BS585
+					  12/06/2022
+					  UPDATED FLIP WITH COLOR AND BOLD
+					  */
+					 case FLIP:
 						int flip = (int)((Math.random()*(2))+1);
 						String flipMessage = "<b style=color:blue>Coin landed on heads!</b>";
 						if(flip ==2){
@@ -137,20 +147,25 @@ public class Room implements AutoCloseable {
 						sendMessage(client, flipMessage);
 						wasCommand = true;
 						break;
-				/*
-				 *BS585
-				 * 11/15/2022
-				 * What roll is doing is using math.random to generator a roll between 0-4.
-				 * once /roll is used, rollmessage is than printed out with the dice roll number. 
-				 * sendmessage is used to prompt the users the rollMessage, message.
-				 */
+					/*
+					*BS585
+					* 11/15/2022
+					* What roll is doing is using math.random to generator a roll between 0-4.
+					* once /roll is used, rollmessage is than printed out with the dice roll number. 
+					* sendmessage is used to prompt the users the rollMessage, message.
+					*/
+					/*
+					 * BS585
+					 * 12/06/2022
+					 * UPDATED ROLL WITH BOLD AND COLOR
+					 */
 					case ROLL:
 						int roll = (int)((Math.random()*(5)));
 						String rollMessage = "<b style=color:green>Dice rolled a "+Integer.toString(roll)+" (dice roll is 0-4)</b>";
 						sendMessage(client, rollMessage);
 						wasCommand = true;
 						break;
-					
+			
 					default:
 						wasCommand = false;
 						break;
@@ -206,7 +221,7 @@ public class Room implements AutoCloseable {
 		}
 		info("Sending message to " + clients.size() + " clients");
 		if (sender != null && processCommands(message, sender)) {
-			// it was a command, don't broadcast
+			
 			return;
 		}
 		message = formatMessage(message);
@@ -222,7 +237,39 @@ public class Room implements AutoCloseable {
 			}
 		}
 	}
+
+	/*  
+	//sends a private message if a specific user is tagged
+	protected boolean sendPM(ServerThread sender, String message) {
+    	boolean isPM = false;
+    	String receiver = null;
+    	
+    	if (message.indexOf("@") > -1) {
+			String[] words = message.split(" ");
+			for(String word: words){
+			    if (word.charAt(0)=='@'){
+			        receiver = word.substring(1);
+			        isPM = true;
+			        //now that the message is known to be private, we can send it to each receiver
+			        
+			        Iterator<ServerThread> iter = clients.iterator();
+					while (iter.hasNext()) {
+						ServerThread c = iter.next();
+						 {
+							client.sendMessage(sender.getClientName(), message);
+						}
+					}
+			    }
+			}
+			//send one message to the sender so they can see it went through
+			sender.sendMessage(sender.getClientName(), message);
+		}
+    	//return true boolean
+    	return isPM;
+    }
+	 */
 	
+
 	protected String formatMessage(String message) {
 		String alteredMessage = message;
 		
