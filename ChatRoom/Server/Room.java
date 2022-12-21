@@ -231,44 +231,15 @@ public class Room implements AutoCloseable {
 			while (iter.hasNext()) {
 				ServerThread client = iter.next();
 				boolean messageSent = client.sendMessage(from, message);
-				if (!messageSent) {
-					handleDisconnect(iter, client);
+					if (!messageSent) {
+						handleDisconnect(iter, client);
 				}
 			}
 		}
 	}
-
-	/*  
-	//sends a private message if a specific user is tagged
-	protected boolean sendPM(ServerThread sender, String message) {
-    	boolean isPM = false;
-    	String receiver = null;
-    	
-    	if (message.indexOf("@") > -1) {
-			String[] words = message.split(" ");
-			for(String word: words){
-			    if (word.charAt(0)=='@'){
-			        receiver = word.substring(1);
-			        isPM = true;
-			        //now that the message is known to be private, we can send it to each receiver
-			        
-			        Iterator<ServerThread> iter = clients.iterator();
-					while (iter.hasNext()) {
-						ServerThread c = iter.next();
-						 {
-							client.sendMessage(sender.getClientName(), message);
-						}
-					}
-			    }
-			}
-			//send one message to the sender so they can see it went through
-			sender.sendMessage(sender.getClientName(), message);
-		}
-    	//return true boolean
-    	return isPM;
-    }
-	 */
 	
+
+
 
 	protected String formatMessage(String message) {
 		String alteredMessage = message;
