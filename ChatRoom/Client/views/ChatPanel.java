@@ -71,11 +71,11 @@ public class ChatPanel extends JPanel {
         JTextField textValue = new JTextField();
         input.add(textValue);
         JButton button = new JButton("Send");
+       
         /*bs585
         12-21-2022
         adding EXPORT button onto the panel
         */
-        
         JPanel export = new JPanel();
         export.setLayout(new BoxLayout(export, BoxLayout.X_AXIS));
         JButton exportButton = new JButton("Export");
