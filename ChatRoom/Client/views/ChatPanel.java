@@ -10,8 +10,13 @@ import java.awt.event.ContainerListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.File;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -29,6 +34,12 @@ import ChatRoom.client.ClientUtils;
 import ChatRoom.client.ICardControls;
 
 public class ChatPanel extends JPanel {
+    
+    
+    //implementing chat history
+    private List<String> chatHistory;
+
+    
     private static Logger logger = Logger.getLogger(ChatPanel.class.getName());
     private JPanel chatArea = null;
     private UserListPanel userListPanel;
@@ -39,6 +50,10 @@ public class ChatPanel extends JPanel {
         JPanel content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        
+        
+        //chat history
+        this.chatHistory = new ArrayList<>();
 
         // wraps a viewport to provide scroll capabilities
         JScrollPane scroll = new JScrollPane(content);
@@ -49,12 +64,26 @@ public class ChatPanel extends JPanel {
         wrapper.add(scroll);
         this.add(wrapper, BorderLayout.CENTER);
 
+        
+
         JPanel input = new JPanel();
         input.setLayout(new BoxLayout(input, BoxLayout.X_AXIS));
         JTextField textValue = new JTextField();
         input.add(textValue);
         JButton button = new JButton("Send");
-        // lets us submit with the enter key instead of just the button click
+       
+        /*bs585
+        12-21-2022
+        adding EXPORT button onto the panel
+        */
+        JPanel export = new JPanel();
+        export.setLayout(new BoxLayout(export, BoxLayout.X_AXIS));
+        JButton exportButton = new JButton("Export");
+        input.add(exportButton);
+        exportButton.addActionListener(event -> onExportButtonClick());
+       
+        
+
         textValue.addKeyListener(new KeyListener() {
 
             @Override
@@ -150,9 +179,9 @@ public class ChatPanel extends JPanel {
     }
     public void addText(String text) {
         JPanel content = chatArea;
+                
         // add message
         JEditorPane textContainer = new JEditorPane("text/html", text);
-
         // sizes the panel to attempt to take up the width of the container
         // and expand in height based on word wrapping
         textContainer.setLayout(null);
@@ -167,4 +196,23 @@ public class ChatPanel extends JPanel {
         JScrollBar vertical = ((JScrollPane) chatArea.getParent().getParent()).getVerticalScrollBar();
         vertical.setValue(vertical.getMaximum());
     }
+    /*
+     * bs585
+     * 12-21-2022
+     * allow chathistory.txt file to be created. CODE IS UNABLE TO PRINT OUT ACTUAL CHAT HISTORY.
+     */
+    void onExportButtonClick() {
+        File outputFile = new File("chathistory.txt");
+    
+        try (PrintWriter writer = new PrintWriter(outputFile)) {
+            for (String message : chatHistory) {
+                writer.println(message);
+            }
+          } catch (Exception e) {
+            System.out.println("Error!!!");
+        }
+        }    
+
+  
+    
 }
